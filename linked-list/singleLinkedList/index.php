@@ -138,20 +138,36 @@ class LinkedList{
         echo "null\n";
     }
 
+    public function displayRecursive($node){
+        if ($node === null) {
+            return;
+        }
+        echo $node->data . "->";
+        $this->displayRecursive($node->next);
+    }
+
+    public function displayReverseRecursive($node){
+        if ($node === null) {
+            return;
+        }
+        $this->displayReverseRecursive($node->next);
+        echo $node->data . "->";
+    }
+
 }
 
-$linkedList = new LinkedList(3);
-$linkedList->insertLast(1);
-$linkedList->insertLast(2);
-$linkedList->insertLast(3);
-$linkedList->insertFirst(0);
-$linkedList->insertFirst(-1);
-$linkedList->insertAt(0.5, 3);
-$linkedList->deleteFirst();
-$linkedList->deleteFirst();
-$linkedList->deleteLast();
+// $linkedList = new LinkedList(3);
+// $linkedList->insertLast(1);
+// $linkedList->insertLast(2);
+// $linkedList->insertLast(3);
+// $linkedList->insertFirst(0);
+// $linkedList->insertFirst(-1);
+// $linkedList->insertAt(0.5, 3);
+// $linkedList->deleteFirst();
+// $linkedList->deleteFirst();
 // $linkedList->deleteLast();
-$linkedList->delete(10);
+// $linkedList->deleteLast();
+// $linkedList->delete(10);
 // var_dump($linkedList); 
 
 ?>
