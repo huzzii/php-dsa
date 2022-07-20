@@ -154,6 +154,59 @@ class LinkedList{
         echo $node->data . "->";
     }
 
+    public function reverseIterative(){
+        $prev = null;
+        $current = $this->headNode;
+        $next = null;
+        while ($current !== null) {
+            $next = $current->next;
+            $current->next = $prev;
+            $prev = $current;
+            $current = $next;
+        }
+        $this->headNode = $prev;
+        $this->display();
+    }
+    
+    public function removeDuplicatesUnsorted(){
+        echo "before duplicate array \n";
+        $this->display();
+        $nodeToBeCompared = $this->headNode;
+
+        while ($nodeToBeCompared->next !== null) {
+            // echo $nodeToBeCompared->data;
+            $comparingNode = $nodeToBeCompared;
+            while ($comparingNode->next !== null) {
+                if ($nodeToBeCompared->data === $comparingNode->next->data) {
+                    $comparingNode->next = $comparingNode->next->next;
+                }
+                $comparingNode = $comparingNode->next;
+            }
+            $nodeToBeCompared = $nodeToBeCompared->next;
+        }
+        echo "After removing duplicates \n";
+        $this->display();
+    }
+
+    public function  removeDuplicatesSorted(){
+        $nodeToBeCompared = $this->headNode;
+        echo "Before duplicates\n";
+        $this->display();
+    
+        while($nodeToBeCompared->next != null){
+    
+    
+            if($nodeToBeCompared->data == $nodeToBeCompared->next->data){
+                $nodeToBeCompared->next = $nodeToBeCompared->next->next;
+            }
+    
+            $nodeToBeCompared = $nodeToBeCompared->next;
+        }
+    
+        echo "After removing duplicates\n";
+    
+        $this->display();
+    }
 }
 
 // $linkedList = new LinkedList(3);

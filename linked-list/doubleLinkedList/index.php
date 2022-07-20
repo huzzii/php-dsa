@@ -110,35 +110,106 @@ class DoublyLinkedList{
         }
     }
 
-    public function delete($data){
-        if ($this->headNode->data === $data) {
-            $this->deleteHead();
-        } else if($this->headNode !== null){
-            $current = $this->headNode;
-            for ($i=0; $i < $this->count; $i++) { 
-                if ($current->data = $data) {
-                    $prevNode = $current->prev;
-                    $nextNode = $current->next;
-                    $prevNode->next = $nextNode;
-                    $nextNode->prev = $prevNode;
-                }
-                $current = $current->next;
-            }
+    // public function delete($data){
+    //     if ($this->headNode->data === $data) {
+    //         $this->deleteHead();
+    //     } else if($this->headNode !== null){
+    //         $current = $this->headNode;
+    //         for ($i=0; $i < $this->count; $i++) { 
+    //             if ($current->data = $data) {
+    //                 $prevNode = $current->prev;
+    //                 $nextNode = $current->next;
+    //                 $prevNode->next = $nextNode;
+    //                 $nextNode->prev = $prevNode;
+    //             }
+    //             $current = $current->next;
+    //         }
+    //     }
+    //     $this->count--;
+    //     $this->display();
+    // }
+
+    public function reverse(){
+        $prev = null;
+        $currentNode = $this->headNode;
+        $nextNode = null;
+
+        while($currentNode != null){
+            $nextNode = $currentNode->next;
+            $currentNode->next = $prev;
+            $prev = $currentNode;
+            $currentNode = $nextNode;
         }
-        $this->count--;
+
+        $this->headNode = $prev;
+
+        $this->display();
+    }
+
+
+    public function displayRecursive($node){
+        if($node == null){
+           return;
+        }
+
+
+        $this->displayRecursive($node->next);
+        echo $node->data , "->";
+    }
+
+
+    public function removeDuplicates(){
+        echo "Before duplicates\n";
+        $this->display();
+        $nodeToBeCompared = $this->headNode;
+
+        while($nodeToBeCompared->next != null){
+            $comparingNode = $nodeToBeCompared;
+            while($comparingNode->next != null){
+                if($nodeToBeCompared->data === $comparingNode->next->data){
+                    $comparingNode->next = $comparingNode->next->next;
+                }
+
+                $comparingNode = $comparingNode->next;
+            }
+
+            $nodeToBeCompared = $nodeToBeCompared->next;
+        }
+        echo "After removing duplicates\n";
+        $this->display();
+
+    }
+
+    public function removeDuplicatesInSortedList(){
+        $nodeToBeCompared = $this->headNode;
+        echo "Before duplicates\n";
+        $this->display();
+
+        while($nodeToBeCompared->next != null){
+
+
+            if($nodeToBeCompared->data == $nodeToBeCompared->next->data){
+                $nodeToBeCompared->next = $nodeToBeCompared->next->next;
+            }
+
+            $nodeToBeCompared = $nodeToBeCompared->next;
+        }
+
+        echo "After removing duplicates\n";
+
         $this->display();
     }
 }
 
-$dl = new DoublyLinkedList;
-$dl->insertAtFirst(3);
-$dl->insertAtFirst(2);
-$dl->insertAtFirst(1);
-$dl->insertAtFirst(0);
-$dl->insertAtFirst(-1);
-$dl->insertAtPos(4,1);
-$dl->insertAtLast(11);
-$dl->deleteHead();
-$dl->deleteLast();
-$dl->delete(1);
+// $dl = new DoublyLinkedList;
+// $dl->insertAtFirst(3);
+// $dl->insertAtFirst(2);
+// $dl->insertAtFirst(1);
+// $dl->insertAtFirst(0);
+// $dl->insertAtFirst(-1);
+// $dl->insertAtPos(4,1);
+// $dl->insertAtLast(11);
+// $dl->deleteHead();
+// $dl->deleteLast();
+// $dl->delete(1);
 ?>
